@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## NextJS File Structure
 
-<img src="./public/nextjs-mindmap.png" >
+<img src="./public/static/nextjs-mindmap.png" >
 
 ## Custom TailwindCSS
 
@@ -142,3 +142,9 @@ export const metadata: Metadata = {
   },
 }
 ```
+
+## Server Components
+
+Like React `Client` components but instead fetched and rendered at the server. [Server components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) are built by the server and are sent as streams of text data to reduce large dependencies and client-side javascript, keep sensitive data on the server (keys, api tokens). Client components are still needed to add interactivity, event listeners, use state and lifecycle effects, use browser-only APIs, custom hooks that depend on state, etc.
+
+<img src="./public/static/server-components.png" width="500" style="display:flex;margin:auto;">
