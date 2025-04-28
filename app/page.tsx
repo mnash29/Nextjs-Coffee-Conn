@@ -1,12 +1,61 @@
-import Link from "next/link";
-import Banner from "../components/banner.client"
+import Banner from "../components/banner.client";
+import Card from "@/components/card.server";
 
 export default function Home() {
   const coffeeStoreId = "dark-horse-coffee";
+  const coffeeStores = [
+    {
+      name: "StrangeLove Coffee",
+      imgUrl:
+        "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80",
+    },
+    {
+      name: "Dark Horse Coffee",
+      imgUrl:
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80",
+    },
+    {
+      name: "StrangeLove Coffee",
+      imgUrl:
+        "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80",
+    },
+    {
+      name: "Dark Horse Coffee",
+      imgUrl:
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80",
+    },
+    {
+      name: "StrangeLove Coffee",
+      imgUrl:
+        "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80",
+    },
+    {
+      name: "Dark Horse Coffee",
+      imgUrl:
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80",
+    },
+  ];
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-14">
-      <Banner />
-      <Link href={`/coffee-store/${coffeeStoreId}`}>Dark Horse Coffee</Link>
-    </main>
+    <div className="mb-56">
+      <main className="mx-auto mt-10 max-w-6xl px-4">
+        <Banner />
+        <div className="mt-20">
+        <h2 className="mt-8 pb-8 text-4xl font-bold text-white">
+          Toronto Stores
+        </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-6">
+          {coffeeStores.map((coffeeStore, idx) => (
+            <Card
+              name={coffeeStore.name}
+              imgUrl={coffeeStore.imgUrl}
+              key={`${coffeeStore.name}-${idx}`}
+              href={`/coffee-store/${coffeeStoreId}`}
+            />
+          ))}
+        </div>
+      </main>
+    </div>
   );
 }
