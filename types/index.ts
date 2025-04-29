@@ -27,3 +27,5 @@ export type UnsplashQueryResult = {
     small: string;
   };
 };
+
+export type PositionType = { latitude: number; longitude: number };

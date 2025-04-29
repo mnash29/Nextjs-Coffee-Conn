@@ -1,4 +1,4 @@
-import { MapBoxRetrieveType, MapBoxSuggestType } from "@/types";
+import { MapBoxRetrieveType, MapBoxSuggestType, PositionType } from "@/types";
 import { fetchCoffeeStorePhotos } from "./photos";
 
 const transformSuggestCoffeeData = (
@@ -27,13 +27,16 @@ const transformRetrieveCoffeeData = (
   };
 };
 
-export const fetchCoffeeStores = async () => {
+export const fetchCoffeeStores = async (
+  coords: PositionType,
+  limit: number = 6
+) => {
   try {
     const response = await fetch(
-      `https://api.mapbox.com/search/searchbox/v1/suggest?q=coffee%2520shop&limit=6&types=poi&session_token=${process.env.MAPBOX_SESSION_TOKEN}&proximity=-117.813255%2C33.888504&access_token=${process.env.MAPBOX_ACCESS_TOKEN}`
+      `https://api.mapbox.com/search/searchbox/v1/suggest?q=coffee%2520shop&limit=${limit}&types=poi&session_token=${process.env.NEXT_PUBLIC_MAPBOX_SESSION_TOKEN}&proximity=${coords.longitude}%2C${coords.latitude}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
     );
     const data = await response.json();
-    const photos = await fetchCoffeeStorePhotos();
+    const photos = await fetchCoffeeStorePhotos(limit);
 
     return data.suggestions.map((result: MapBoxSuggestType, idx: number) =>
       transformSuggestCoffeeData(result, idx, photos)
@@ -46,14 +49,14 @@ export const fetchCoffeeStores = async () => {
 export const fetchCoffeeStoreById = async (id: string) => {
   try {
     const response = await fetch(
-      `https://api.mapbox.com/search/searchbox/v1/retrieve/${id}?session_token=${process.env.MAPBOX_SESSION_TOKEN}&access_token=${process.env.MAPBOX_ACCESS_TOKEN}`
+      `https://api.mapbox.com/search/searchbox/v1/retrieve/${id}?session_token=${process.env.NEXT_PUBLIC_MAPBOX_SESSION_TOKEN}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
     );
     const data = await response.json();
-    const photos = await fetchCoffeeStorePhotos();
+    const photos = await fetchCoffeeStorePhotos(1);
 
     const transformedData = data.features.map(
-      (result: MapBoxRetrieveType, idx: number) =>
-        transformRetrieveCoffeeData(result, idx, photos)
+      (result: MapBoxRetrieveType) =>
+        transformRetrieveCoffeeData(result, 0, photos)
     );
 
     return transformedData.length > 0 ? transformedData[0] : {};

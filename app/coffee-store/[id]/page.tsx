@@ -10,7 +10,10 @@ const fetchCoffeeStore = async (id: string) => {
 };
 
 export async function generateStaticParams() {
-  const coffeeStores = await fetchCoffeeStores();
+  const coffeeStores = await fetchCoffeeStores({
+    longitude: -117.813255,
+    latitude: 33.888504,
+  }, 6);
   
   return coffeeStores.map((coffeeStore: CoffeeStoreType) => {
     return {

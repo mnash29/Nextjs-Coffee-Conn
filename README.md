@@ -210,6 +210,8 @@ The process of pre-rendering a page is called [static generation](https://nextjs
 
 Server rendering enables users and Ranking bots to request and receive a fully rendered page even before javascript has loaded or executed any client-side code. This is important for SEO because search engines can crawl and index the content of the page, improving its visibility in search results. Server rendering also improves performance by reducing the time it takes for a page to load and display content to users.
 
+> NOTE: Children of a `Client Component` ('use client') can only be client components even if they don't include the `use client` directive. All children of a client component are loaded into the client bundle, which can increase the size of the bundle and slow down the initial load time of the page. This is because client components are designed to be interactive and require access to browser APIs, which are not available on the server.
+
 ### Data Fetching
 
 1. `Static site generation` (SSG) - pre-rendering a page at build time

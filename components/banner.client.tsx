@@ -1,13 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
-export default function Banner() {
-  const handleOnClick = () => {
-    console.log("Hi, Banner!");
-    
-  };
-
+export default function Banner({
+  handleOnClick,
+  buttonText
+}: {
+  handleOnClick: MouseEventHandler<HTMLButtonElement> | undefined;
+  buttonText: string;
+}) {
   return (
     <div className="mb-12 grid lg:mb-24 lg:grid-cols-2">
       <div className="z-20 flex flex-col px-2 md:pt-12">
@@ -20,7 +21,7 @@ export default function Banner() {
         </p>
 
         <div className="mt-12">
-          <button onClick={handleOnClick}>View store nearby</button>
+          <button onClick={handleOnClick}>{buttonText}</button>
         </div>
       </div>
     </div>
