@@ -2,14 +2,25 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 
-import { fetchCoffeeStoreById } from "@/lib/coffee-stores";
+import { fetchCoffeeStoreById, fetchCoffeeStores } from "@/lib/coffee-stores";
+import { CoffeeStoreType, Params } from "@/types";
 
 const fetchCoffeeStore = async (id: string) => {
   return await fetchCoffeeStoreById(id);
 };
 
-export default async function Page(props: { params: { id: string } }) {
-  const { params } = await props;
+export async function generateStaticParams() {
+  const coffeeStores = await fetchCoffeeStores();
+  
+  return coffeeStores.map((coffeeStore: CoffeeStoreType) => {
+    return {
+      id: coffeeStore.id.toString(),
+    };
+  });
+};
+
+export default async function Page(props: { params: Params }) {
+  const { params } = props;
   const { id } = await params;
   const coffeeStore = await fetchCoffeeStore(id);
   const { name, address, imgUrl } = coffeeStore;

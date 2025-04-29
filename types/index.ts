@@ -14,3 +14,5 @@ export type MapBoxType = {
     distance: number;
   };
 };
+
+export type Params = Promise<{id: string;}>;
