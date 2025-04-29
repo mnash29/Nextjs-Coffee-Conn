@@ -257,3 +257,9 @@ const res = await fetch("https://api.disneyapi.dev/api/v1/characters", {
   next: { revalidate: 3600 }, // Revalidate every hour
 });
 ```
+
+### Generate Static Params
+
+```js
+
+```
