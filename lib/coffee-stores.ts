@@ -1,8 +1,5 @@
-import {
-  MapBoxRetrieveType,
-  MapBoxSuggestType,
-  UnplashQueryResult,
-} from "@/types";
+import { MapBoxRetrieveType, MapBoxSuggestType } from "@/types";
+import { fetchCoffeeStorePhotos } from "./photos";
 
 const transformSuggestCoffeeData = (
   result: MapBoxSuggestType,
@@ -28,20 +25,6 @@ const transformRetrieveCoffeeData = (
     address: result?.properties?.full_address,
     imgUrl: photos.length > 0 ? photos[idx] : "",
   };
-};
-
-export const fetchCoffeeStorePhotos = async () => {
-  try {
-    const response = await fetch(
-      `https://api.unsplash.com/search/photos?query="coffee shop"&client_id=${process.env.UNSPLASH_ACCESS_KEY}&page=1&per_page=6`
-    );
-    const data = await response.json();
-    return data?.results?.map(
-      (result: UnplashQueryResult) => result.urls["small"]
-    );
-  } catch (error) {
-    console.error("Error fetching coffee store photos:", error);
-  }
 };
 
 export const fetchCoffeeStores = async () => {
