@@ -6,13 +6,24 @@ export type CoffeeStoreType = {
   imgUrl: string;
 };
 
-export type MapBoxType = {
+export type MapBoxSuggestType = {
+  name: string;
+  mapbox_id: string;
+  full_address: string;
+};
+
+export type MapBoxRetrieveType = {
   properties: {
     name: string;
     mapbox_id: string;
     full_address: string;
-    distance: number;
   };
 };
 
-export type Params = Promise<{id: string;}>;
+export type Params = Promise<{ id: string }>;
+
+export type UnplashQueryResult = {
+  urls: {
+    small: string;
+  };
+};
