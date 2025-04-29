@@ -1,7 +1,7 @@
-import { fetchCoffeeStores } from "@/lib/coffee-stores";
 import Banner from "../components/banner.client";
 import Card from "@/components/card.server";
 import { CoffeeStoreType } from "@/types";
+import { fetchCoffeeStores } from "@/lib/coffee-stores";
 
 
 const getCoffeeStores = async () => {
@@ -9,7 +9,6 @@ const getCoffeeStores = async () => {
 }
 
 export default async function Home() {
-  const coffeeStoreId = "dark-horse-coffee";
   const coffeeStores = await getCoffeeStores(); 
  
   return (

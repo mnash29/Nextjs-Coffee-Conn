@@ -24,3 +24,20 @@ export const fetchCoffeeStores = async () => {
     console.error("Error fetching coffee stores:", error);
   }
 };
+
+export const fetchCoffeeStoreById = async (id: string) => {
+    try {
+        const response = await fetch(
+          `https://api.mapbox.com/search/searchbox/v1/retrieve/${id}?session_token=${process.env.MAPBOX_SESSION_TOKEN}&access_token=${process.env.MAPBOX_ACCESS_TOKEN}`
+        );
+        const data = await response.json();
+    
+        const transformedData = data.features.map((result: MapBoxType) =>
+          transformCoffeeData(result)
+        );
+
+        return transformedData.length > 0 ? transformedData[0] : {};
+      } catch (error) {
+        console.error("Error fetching coffee stores:", error);
+      }
+};
