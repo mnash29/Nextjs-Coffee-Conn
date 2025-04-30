@@ -3,17 +3,17 @@ import React from "react";
 import Image from "next/image";
 
 import { fetchCoffeeStoreById, fetchCoffeeStores } from "@/lib/coffee-stores";
-import { CoffeeStoreType, Params } from "@/types";
+import { CoffeeStoreType, Params, SearchParams } from "@/types";
 
-const fetchCoffeeStore = async (id: string) => {
-  return await fetchCoffeeStoreById(id);
+const fetchCoffeeStore = async (id: string, queryId: string, limit: string) => {
+  return await fetchCoffeeStoreById(id, queryId, limit);
 };
 
 export async function generateStaticParams() {
   const coffeeStores = await fetchCoffeeStores({
     longitude: -117.813255,
     latitude: 33.888504,
-  }, 6);
+  });
   
   return coffeeStores.map((coffeeStore: CoffeeStoreType) => {
     return {
@@ -22,10 +22,15 @@ export async function generateStaticParams() {
   });
 };
 
-export default async function Page(props: { params: Params }) {
-  const { params } = props;
+export default async function Page(props: { 
+  params: Params;
+  searchParams: SearchParams;
+}) {
+  const { params, searchParams } = props;
   const { id } = await params;
-  const coffeeStore = await fetchCoffeeStore(id);
+  const { id: queryId, limit } = await searchParams;
+
+  const coffeeStore = await fetchCoffeeStore(id, queryId, limit);
   const { name, address, imgUrl } = coffeeStore;
 
   return (

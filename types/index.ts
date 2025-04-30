@@ -22,6 +22,8 @@ export type MapBoxRetrieveType = {
 
 export type Params = Promise<{ id: string }>;
 
+export type SearchParams = Promise<{ id: string; limit: string }>;
+
 export type UnsplashQueryResult = {
   urls: {
     small: string;

@@ -260,8 +260,21 @@ const res = await fetch("https://api.disneyapi.dev/api/v1/characters", {
 });
 ```
 
-### Generate Static Params
+## Route Handlers
+
+`Route handlers` are used to handle incoming requests and return responses. They can be used to create APIs, handle form submissions, and more. Route handlers are defined in the `app/api` directory and can be used to create RESTful APIs.
 
 ```js
+// app/api/hello/route.ts
+import { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl;
+  const name = searchParams.get("name");
+  const age = searchParams.get("age");
+
+  return NextResponse.json({ name, age });
+}
+// call by navigating to http://localhost:3000/api/hello?name=John&age=30
 ```

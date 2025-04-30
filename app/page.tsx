@@ -23,12 +23,12 @@ export default async function Home() {
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-6">
-          {coffeeStores.map((coffeeStore: CoffeeStoreType) => (
+          {coffeeStores.map((coffeeStore: CoffeeStoreType, idx: number) => (
             <Card
               name={coffeeStore.name}
               imgUrl={coffeeStore.imgUrl}
               key={coffeeStore.id}
-              href={`/coffee-store/${coffeeStore.id}`}
+              href={`/coffee-store/${coffeeStore.id}?id=${idx}&limit=${coffeeStores.length}`}
             />
           ))}
         </div>
